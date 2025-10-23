@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>teste DOM</h1>
+
+    <div class="container">
+        <p>teste 1</p>
+        <p>lorem <a href="#"> link </a> jkasbkjask djas </p>
+        <p>teste 2</p>
+
+        <h2>Lista</h2>
+        <ul>
+            <li>item 1</li>
+            <li>item 2
+                <ul>
+                    <li>item 2.a</li>
+                    <li>item 2.b</li>
+                    <li>item 2.c</li>
+                    <li>
+                        <!-- asdasd  -->
+                    </li>
+                </ul>
+            </li>
+            <li>item <a href="#">link</a></li>
+        </ul>
+
+        <Script>
+
+
+            /*
+            🧠 1. O que é o DOM
+            
+            O DOM (Document Object Model) é a representação do seu HTML na memória.
+            Cada tag (como <div>, <h1>, <ul>, etc.) vira um objeto que o JavaScript consegue acessar e alterar.
+            
+            🔍 2. Selecionando elementos
+            
+            Você pode pegar elementos da página com:
+            
+            document.querySelector("h1") → pega o primeiro elemento <h1>.
+            
+            document.querySelectorAll("li") → pega todos os <li> (retorna uma lista).
+            
+            document.getElementById("id") → pega o elemento com o id especificado.
+            
+            document.getElementsByClassName("classe") → pega todos com essa classe.
+            
+            Esses comandos te permitem encontrar qualquer parte da página.
+            
+            🧩 3. Navegação entre elementos
+            
+            Depois de pegar um elemento, dá pra andar por ele no DOM, como se fosse uma árvore:
+            
+            .parentElement → sobe um nível (pai do elemento)
+            
+            .children → pega os filhos elementos (sem contar espaços)
+            
+            .childNodes → pega todos os filhos, inclusive textos e comentários
+            
+            .firstElementChild → primeiro filho elemento
+            
+            .lastElementChild → último filho elemento
+            
+            .previousElementSibling → o irmão anterior
+            
+            .nextElementSibling → o irmão seguinte*/
+
+
+
+
+            // O objeto "document" representa todo o documento HTML.
+            // "document.body" representa o elemento <body> do HTML.
+            console.log(document.body)
+            // "parentElement" retorna o elemento pai do <body> — ou seja, o <html>.
+            // MAS se o pai não for um ELEMENTO (por exemplo, o nó raiz "#document"),
+            // então ele retorna null.
+            console.log(document.body.parentElement)
+
+            // "parentNode" também retorna o nó pai, mas ele não se limita a ELEMENTOS.
+            // Pode retornar qualquer tipo de nó — por exemplo, o "#document".
+            console.log(document.body.parentNode)
+            // 💡 Diferença principal:
+            // - parentElement → só retorna elementos (ou null).
+            // - parentNode → retorna qualquer nó pai (elemento, documento, etc).
+
+            // Em resumo:
+            // document.body.parentElement → <html>
+            // document.body.parentNode → #document
+            const html = document.body.parentElement
+            console.log(document.body.parentElement === document.body.parentNode)
+            console.log(html.parentElement)
+            console.log(html.parentNode)
+
+            const h2 = document.querySelector("h2")
+            // Pega o PRÓXIMO elemento irmão do <h2>
+
+            const h2nextSibling = h2.nextElementSibling
+            h2nextSibling.style.background = "yellow"
+
+            // Mostra no console o elemento anterior ao <h2>
+            console.log(h2.previousElementSibling)
+
+            const link = document.querySelector("a")
+            const list = document.querySelector("ul ul")
+            // lastChild → retorna o último nó filho do elemento pai
+            // Isso inclui *textos, espaços, quebras de linha*, etc.
+            console.log(link.parentElement.lastChild);
+            // Pode mostrar "#text" (um nó de texto invisível)
+            // se houver quebra de linha ou espaço após o último elemento.
+
+            // lastElementChild → retorna o último **elemento** filho
+            // (ignora espaços e nós de texto)
+            console.log(link.parentElement.lastElementChild);
+
+            // hasChildNodes() → verifica se o elemento possui **qualquer tipo de nó filho**
+            // (pode ser texto, outro elemento, comentário, etc.)
+            console.log(list.lastElementChild.hasChildNodes())
+
+            // nodeType → retorna o tipo do nó:
+            // 1 = ELEMENT_NODE
+            // 3 = TEXT_NODE
+            // 8 = COMMENT_NODE
+            console.log(list.lastElementChild.childNodes[1].nodeType)
+
+        </Script>
+</body>
+
+</html>
